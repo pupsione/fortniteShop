@@ -1,11 +1,11 @@
 import { BaskedItem } from './BaskedItem';
+import { useContext } from "react";
+import { ShopContext } from "../context";
 
-function BaskedList(props) {
-    const { order = [],
-        handleBasked = Function.prototype,
-        removeBasket = Function.prototype,
-        incQuantity = Function.prototype,
-        decQuantity = Function.prototype } = props
+function BaskedList() {
+    const {
+        order = [],
+        handleBasked = Function.prototype } = useContext(ShopContext)
 
     const totalPrice = order.reduce((sum, el) => {
         return sum + el.finalPrice * el.quantity
@@ -22,10 +22,6 @@ function BaskedList(props) {
                     <BaskedItem
                         key={item.mainId}
                         {...item}
-                        handleBasked={handleBasked}
-                        removeBasket={removeBasket}
-                        incQuantity={incQuantity}
-                        decQuantity={decQuantity}
                     />
                 ))
             ) : (
